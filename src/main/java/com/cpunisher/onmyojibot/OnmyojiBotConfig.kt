@@ -11,8 +11,8 @@ object OnmyojiBotConfig : AutoSavePluginConfig("setting") {
     data class DrawProbability(
         val r: Int = 7875,
         val sr: Int = 2000,
-        val ssr: Int = 1000,
-        val sp: Int = 250
+        val ssr: Int = 100,
+        val sp: Int = 25
     )
 
     @ValueDescription("设定抽卡时各稀有度的概率.")
