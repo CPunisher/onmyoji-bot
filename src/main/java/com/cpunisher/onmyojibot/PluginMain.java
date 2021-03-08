@@ -1,5 +1,6 @@
 package com.cpunisher.onmyojibot;
 
+import com.cpunisher.onmyojibot.database.Database;
 import com.cpunisher.onmyojibot.eventhandler.MessageEventDispatcher;
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder;
@@ -18,6 +19,12 @@ public class PluginMain extends JavaPlugin {
         this.reloadPluginConfig(OnmyojiBotConfig.INSTANCE);
         this.reloadPluginData(ShikigamiData.INSTANCE);
         MessageEventDispatcher.registerAll();
+        Database.INSTANCE.connect();
         GlobalEventChannel.INSTANCE.subscribeAlways(GroupMessageEvent.class, new MessageEventDispatcher());
+    }
+
+    @Override
+    public void onDisable() {
+        Database.INSTANCE.close();
     }
 }
