@@ -2,6 +2,7 @@ package com.cpunisher.onmyojibot.database;
 
 import com.cpunisher.onmyojibot.OnmyojiBotConfig;
 import com.cpunisher.onmyojibot.PluginMain;
+import com.cpunisher.onmyojibot.database.model.DrawResult;
 import com.cpunisher.onmyojibot.database.model.Player;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -16,6 +17,7 @@ public class Database {
 
     private JdbcPooledConnectionSource connectionSource;
     private Dao<Player, Long> playerDao;
+    private Dao<DrawResult, Integer> resultDao;
 
     public void connect() {
         OnmyojiBotConfig.DatabaseConfig databaseConfig = OnmyojiBotConfig.INSTANCE.getDatabase();
@@ -26,7 +28,9 @@ public class Database {
         try {
             connectionSource = new JdbcPooledConnectionSource(jdbcUrl, username, password);
             TableUtils.createTableIfNotExists(connectionSource, Player.class);
+            TableUtils.createTableIfNotExists(connectionSource, DrawResult.class);
             playerDao = DaoManager.createDao(connectionSource, Player.class);
+            resultDao = DaoManager.createDao(connectionSource, DrawResult.class);
 
             PluginMain.INSTANCE.getLogger().info("Database is connected!");
         } catch (SQLException throwables) {
@@ -47,5 +51,9 @@ public class Database {
 
     public Dao<Player, Long> getPlayerDao() {
         return playerDao;
+    }
+
+    public Dao<DrawResult, Integer> getResultDao() {
+        return resultDao;
     }
 }

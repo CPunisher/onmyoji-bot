@@ -6,9 +6,9 @@ import net.mamoe.mirai.message.data.At;
 import net.mamoe.mirai.message.data.MessageChain;
 import net.mamoe.mirai.message.data.PlainText;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Consumer;
 
 public class MessageEventDispatcher implements Consumer<GroupMessageEvent> {
@@ -21,7 +21,9 @@ public class MessageEventDispatcher implements Consumer<GroupMessageEvent> {
     }
 
     public static void registerAll() {
-        register(new DrawCardEventHandler());
+        register(new DrawCardEventHandler(1, "单抽"));
+        register(new DrawCardEventHandler(10, "十连"));
+        register(new ShowDrawResultEventHandler());
     }
 
     @Override

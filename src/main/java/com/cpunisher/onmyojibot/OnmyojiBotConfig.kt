@@ -26,7 +26,7 @@ object OnmyojiBotConfig : AutoSavePluginConfig("setting") {
     val probability: DrawProbability by value(DrawProbability())
 
     @ValueDescription("每个用户每日抽卡次数上限.")
-    val maxDrawCount: Int by value(10)
+    val maxDrawCount: Int by value(100)
 
     @ValueDescription("数据库设定.")
     val database: DatabaseConfig by value(DatabaseConfig())
