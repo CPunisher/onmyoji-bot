@@ -95,7 +95,7 @@ public class DrawCardEventHandler extends AbstractMessageEventHandler {
                 return newCount;
             }
 
-            if (player.getDrawCount() > this.count) {
+            if (player.getDrawCount() >= this.count) {
                 player.setDrawCount(player.getDrawCount() - this.count);
                 playerDao.update(player);
                 return player.getDrawCount();
